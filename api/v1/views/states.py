@@ -35,10 +35,10 @@ def delete_state(state_id):
 
 @app_views.route("/states", strict_slashes=False, methods=['POST'])
 def add_state():
-    if not request.get_json():
-        return ("Not a JSON", 400)
+    if not request.get_json() or type(request.get_json()) is not dict:
+        return ("Not a JSON\n", 400)
     if 'name' not in request.get_json():
-        return ("Missing name", 400)
+        return ("Missing name\n", 400)
     new_state = State(name=request.get_json()['name'])
     storage.new(new_state)
     storage.save()
