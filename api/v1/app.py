@@ -16,16 +16,25 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def tear(error):
+    """
+    Closes the session
+    """
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
+    """
+    Handles error 404
+    """
     return make_response(jsonify({"error": "Not found"}), 404)
 
 
 @app.errorhandler(400)
 def not_json(error):
+    """
+    Handles error 400
+    """
     return make_response("Not a JSON\n", 400)
 
 

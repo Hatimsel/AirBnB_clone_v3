@@ -13,6 +13,9 @@ from models.state import State
                  strict_slashes=False,
                  methods=['GET'])
 def retrieve_state(state_id=None):
+    """
+    Retrives states
+    """
     if state_id:
         state = storage.get(State, state_id)
         if state is None:
@@ -27,6 +30,9 @@ def retrieve_state(state_id=None):
                  strict_slashes=False,
                  methods=['DELETE'])
 def delete_state(state_id):
+    """
+    Deletes a state
+    """
     state = storage.get(State, state_id)
     if state:
         storage.delete(state)
@@ -37,6 +43,9 @@ def delete_state(state_id):
 
 @app_views.route("/states", strict_slashes=False, methods=['POST'])
 def add_state():
+    """
+    Adds a state
+    """
     if not request.get_json():
         abort(400)
 
@@ -54,6 +63,9 @@ def add_state():
                  strict_slashes=False,
                  methods=['PUT'])
 def update_state(state_id):
+    """
+    Updates a state
+    """
     if state_id:
         if request.get_json() is None:
             abort(400)
