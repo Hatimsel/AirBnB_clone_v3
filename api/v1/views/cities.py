@@ -64,7 +64,6 @@ def add_city(state_id=None):
 
     storage.new(new_city)
     storage.save()
-    print(type(new_city))
 
     return (new_city.to_dict(), 201)
 
