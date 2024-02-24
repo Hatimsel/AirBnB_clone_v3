@@ -2,7 +2,6 @@
 """
 Index with one route
 """
-import json
 from api.v1.views import app_views
 from flask import Flask, jsonify
 from models import storage
@@ -21,7 +20,7 @@ def status():
     """
     Returns the status of our sevrer
     """
-    return json.dumps({"status": "ok\n"})
+    return jsonify({"status": "ok"})
 
 
 @app_views.route("/stats",
