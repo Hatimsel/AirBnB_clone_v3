@@ -21,7 +21,7 @@ def status():
     """
     Returns the status of our sevrer
     """
-    return json.dumps({"status": "ok"})
+    return json.dumps({"status": "ok\n"})
 
 
 @app_views.route("/stats",
