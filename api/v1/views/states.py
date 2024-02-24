@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""""""
+"""
+States view
+"""
 from api.v1.views import app_views
 from flask import Flask, jsonify, make_response, abort, request
 from models import storage
@@ -37,12 +39,14 @@ def delete_state(state_id):
 def add_state():
     if not request.get_json():
         abort(400)
-        # return ("Not a JSON\n", 400)
+
     if 'name' not in request.get_json():
         return ("Missing name\n", 400)
+
     new_state = State(name=request.get_json()['name'])
     storage.new(new_state)
     storage.save()
+
     return (new_state.to_dict(), 201)
 
 

@@ -13,12 +13,16 @@ from models.state import State
 from models.user import User
 
 
-@app_views.route("/status", methods=['GET'])
+@app_views.route("/status",
+                 strict_slashes=False,
+                 methods=['GET'])
 def status():
     return jsonify({"status": "ok"})
 
 
-@app_views.route("/stats", methods=['GET'])
+@app_views.route("/stats",
+                 strict_slashes=False,
+                 methods=['GET'])
 def num_of_obj():
     dict = {}
     classes = {'states': State, 'amenities': Amenity,

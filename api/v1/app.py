@@ -24,6 +24,7 @@ def not_found(error):
 def not_json(error):
     return make_response("Not a JSON\n", 400)
 
+
 if __name__ == '__main__':
     if os.getenv('HBNB_API_HOST'):
         host = os.getenv('HBNB_API_HOST')
