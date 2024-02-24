@@ -17,6 +17,9 @@ from models.user import User
                  strict_slashes=False,
                  methods=['GET'])
 def status():
+    """
+    Returns the status of our sevrer
+    """
     return jsonify({"status": "ok"})
 
 
@@ -24,6 +27,9 @@ def status():
                  strict_slashes=False,
                  methods=['GET'])
 def num_of_obj():
+    """
+    Returns the number of objects
+    """
     dict = {}
     classes = {'states': State, 'amenities': Amenity,
                'cities': City, 'places': Place,
