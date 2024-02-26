@@ -3,7 +3,7 @@
 Amenities view
 """
 from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request
+from flask import Flask, jsonify, abort, request, make_response
 from models import storage
 from models.amenity import Amenity
 
@@ -46,13 +46,14 @@ def add_amenity():
         abort(400)
 
     if 'name' not in request.get_json():
-        return ("Missing name\n", 400)
+        return make_response(jsonify({"error": "Missing name"}), 400)
 
-    new_amenity = Amenity(name=request.get_json()['name'])
+    new_amenity = Amenity(**request.get_json())
 
-    storage.new(new_amenity)
-    storage.save()
-    return (new_amenity.to_dict(), 201)
+    new_amenity.save()
+    # storage.new(new_amenity)
+    # storage.save()
+    return make_response(jsonify(new_amenity.to_dict()), 201)
 
 
 @app_views.route("/amenities/<amenity_id>",
@@ -71,6 +72,6 @@ def update_amenity(amenity_id):
             if k == 'id' or k == 'created_at' or k == 'updated_at':
                 continue
             setattr(amenity, k, v)
-        storage.save()
-        return (amenity.to_dict(), 200)
+        amenity.save()
+        return (jsonify(amenity.to_dict()), 200)
     abort(404)
