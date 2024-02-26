@@ -79,6 +79,38 @@ class TestFileStorage(unittest.TestCase):
         self.assertIs(new_dict, storage._FileStorage__objects)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get_returns_obj(self):
+        """Test that get returns an obj"""
+        storage = FileStorage()
+        st = State()
+        st.save()
+        obj = storage.get(State, st.id)
+        self.assertEqual(type(obj), State)
+        self.assertIs(obj, st)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count_returns_int(self):
+        """Test that count returns an int"""
+        storage = FileStorage()
+        self.assertEqual(type(storage.count()), int)
+        self.assertEqual(storage.count(Amenity), 0)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get_without_params(self):
+        """Test that get with no params"""
+        storage = FileStorage()
+        with self.assertRaises(TypeError):
+            obj = storage.get()
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get_type_error(self):
+        """Test that get type errors"""
+        storage = FileStorage()
+        st = State()
+        with self.assertRaises(TypeError):
+            obj = storage.get(State, list(st.id))
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_new(self):
         """test that new adds an object to the FileStorage.__objects attr"""
         storage = FileStorage()

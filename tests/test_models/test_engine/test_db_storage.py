@@ -76,6 +76,17 @@ class TestFileStorage(unittest.TestCase):
         self.assertIs(type(models.storage.all()), dict)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_get_returns_obj(self):
+        """Test that get returns an object"""
+        st = State()
+        self.assertIs(type(models.storage.get(State, st.id)), State)
+
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_count_returns_int(self):
+        """Test that get returns a number"""
+        self.assertIs(type(models.storage.count()), int)
+
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_no_class(self):
         """Test that all returns all rows when no class is passed"""
 
