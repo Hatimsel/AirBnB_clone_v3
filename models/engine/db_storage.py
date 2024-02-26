@@ -91,10 +91,3 @@ class DBStorage:
         else:
             objs = self.all()
         return len(objs)
-    #
-    # def update(self, obj, iterable):
-    #     for k, v in iterable.items():
-    #         self.__session.query(obj.__class__)\
-    #         .filter(obj.__class__.id == obj.to_dict()['id']).first()\
-    #         .update({k: v})
-    #     self.save()

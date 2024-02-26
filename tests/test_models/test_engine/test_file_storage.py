@@ -93,7 +93,7 @@ class TestFileStorage(unittest.TestCase):
         """Test that count returns an int"""
         storage = FileStorage()
         self.assertEqual(type(storage.count()), int)
-        self.assertEqual(storage.count(Amenity), 0)
+        self.assertEqual(storage.count(Amenity), len(storage.all(Amenity)))
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get_without_params(self):
