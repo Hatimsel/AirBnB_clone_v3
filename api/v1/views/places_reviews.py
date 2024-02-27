@@ -49,6 +49,8 @@ def delete_review(review_id=None):
                  strict_slashes=False,
                  methods=['POST'])
 def add_review(place_id=None):
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if place_id is None:
         abort(404)
 
@@ -84,6 +86,8 @@ def add_review(place_id=None):
                  strict_slashes=False,
                  methods=['PUT'])
 def update_review(review_id):
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if review_id:
         if not request.get_json():
             abort(400)

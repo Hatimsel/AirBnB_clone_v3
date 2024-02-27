@@ -42,6 +42,8 @@ def delete_amenity(amenity_id=None):
                  strict_slashes=False,
                  methods=['POST'])
 def add_amenity():
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if not request.json:
         abort(400)
 
@@ -60,6 +62,8 @@ def add_amenity():
                  strict_slashes=False,
                  methods=['PUT'])
 def update_amenity(amenity_id):
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if amenity_id:
         if not request.get_json():
             abort(400)

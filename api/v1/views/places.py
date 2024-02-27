@@ -49,6 +49,8 @@ def delete_place(place_id=None):
                  strict_slashes=False,
                  methods=['POST'])
 def add_place(city_id=None):
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if city_id is None:
         abort(404)
 
@@ -84,6 +86,8 @@ def add_place(city_id=None):
                  strict_slashes=False,
                  methods=['PUT'])
 def update_place(place_id):
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if place_id:
         if not request.get_json():
             abort(400)
