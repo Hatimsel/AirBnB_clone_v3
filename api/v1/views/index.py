@@ -20,7 +20,7 @@ def status():
     """
     Returns the status of our sevrer
     """
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "OK"})
 
 
 @app_views.route("/stats",
