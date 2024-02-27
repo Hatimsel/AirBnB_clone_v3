@@ -48,7 +48,10 @@ def delete_city(city_id=None):
                  strict_slashes=False,
                  methods=['POST'])
 def add_city(state_id=None):
-    if state_id is None:
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
+
+    if state_id is None or storage.get(State, state_id) is None:
         abort(404)
 
     if not request.json:
@@ -72,6 +75,9 @@ def add_city(state_id=None):
                  strict_slashes=False,
                  methods=['PUT'])
 def update_city(city_id):
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
+
     if city_id:
         if not request.get_json():
             abort(400)
