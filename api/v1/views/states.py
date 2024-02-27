@@ -46,6 +46,8 @@ def add_state():
     """
     Adds a state
     """
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if not request.get_json():
         abort(400)
 
@@ -66,6 +68,8 @@ def update_state(state_id):
     """
     Updates a state
     """
+    if request.headers['Content-Type'] != 'application/json':
+        abort(400)
     if state_id:
         if request.get_json() is None:
             abort(400)
