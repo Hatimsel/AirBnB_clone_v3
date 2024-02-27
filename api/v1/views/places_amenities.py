@@ -31,6 +31,8 @@ def retrieve_place_amenity(place_id=None):
 def delete_place_amenity(place_id=None, amenity_id=None):
     if place_id:
         place = storage.get(Place, place_id)
+        if place is None:
+            abort(404)
         amenities = place.amenities
         for amenity in amenities:
             if amenity.id == amenity_id:
